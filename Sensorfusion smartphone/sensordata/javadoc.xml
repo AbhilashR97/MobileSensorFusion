@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project default="javadoc">
+    <target name="javadoc">
+        <javadoc access="public" author="true" classpath="/home/gushe66/src/android-sdk-linux/tools/support/annotations.jar:/home/gushe66/src/sf-app/bin/classes:/usr/share/java/vecmath.jar:/usr/share/java/j3dutils.jar:/usr/share/java/j3dcore.jar" destdir="doc" doctitle="sensorfusion.jar" nodeprecated="true" nodeprecatedlist="true" noindex="true" nonavbar="false" notree="true" packagenames="com.liu.sensordata" source="1.6" sourcepath="/home/gushe66/src/sf-app/src:src:/home/gushe66/src/sf-app/gen" splitindex="false" use="false" version="true"/>
+    </target>
+</project>
