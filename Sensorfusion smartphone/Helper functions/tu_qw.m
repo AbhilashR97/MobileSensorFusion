@@ -13,8 +13,8 @@ S_q = Sq(x);
 F = (eye(4) + (T/2)*(S_w));
 G = (T/2)*(S_q);
 
-x  = x + F*x;
+x  = F*x;
 
-P = P - F*P*F.' + G*Rw*G.';
+P = F*P*F.' + G*Rw*G.';
 
 end

@@ -9,7 +9,7 @@ Q = Qq(x);
 [dQ0, dQ1, dQ2, dQ3] = dQqdq(x);
 
 hx = Q'*m0;
-Hx = [dQ0*m0, dQ1*m0, dQ2*m0, dQ3*m0];
+Hx = [dQ0'*m0, dQ1'*m0, dQ2'*m0, dQ3'*m0];
 
 % P_temp = kron(eye(3), P);
 

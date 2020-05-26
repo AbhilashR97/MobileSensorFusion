@@ -37,7 +37,7 @@ function [xhat, meas] = Myfilter(calAcc, calGyr, calMag)
   accOut = 0;
   magOut = 0;
   
-  m0 = [0; sqrt(mean_mag(1)^2 + mean_mag(2)^2); mean_mag(3)];
+  m0 = [0, sqrt(mean_mag(1)^2 + mean_mag(2)^2), mean];
 
   Rm = cov_mag;
     
@@ -98,7 +98,7 @@ function [xhat, meas] = Myfilter(calAcc, calGyr, calMag)
       acc = data(1, 2:4)';
       if ~any(isnan(acc))  % Acc measurements are available.
         % Do something
-        acc_bool = true;
+%         acc_bool = true;
       end
       gyr = data(1, 5:7)';
       if ~any(isnan(gyr))  % Gyro measurements are available.
