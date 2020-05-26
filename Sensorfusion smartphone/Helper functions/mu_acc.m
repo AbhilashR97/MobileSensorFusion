@@ -14,6 +14,7 @@ Hx = [dQ0'*g0, dQ1'*g0, dQ2'*g0, dQ3'*g0];
 % P_temp = kron(eye(3), P);
 
 S = Hx*P*Hx.' + Ra;
+S = (S + S')/2;
 
 K = P*Hx.'*inv(S);
 

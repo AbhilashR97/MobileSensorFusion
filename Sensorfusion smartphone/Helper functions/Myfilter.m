@@ -41,7 +41,7 @@ function [xhat, meas] = Myfilter(calAcc, calGyr, calMag)
 
   Rm = cov_mag;
     
-  alpha = 0.15;
+  alpha = 0.05;
 
   L = norm(mean_mag);
     
@@ -97,31 +97,33 @@ function [xhat, meas] = Myfilter(calAcc, calGyr, calMag)
 
       acc = data(1, 2:4)';
       if ~any(isnan(acc))  % Acc measurements are available.
-        % Do something
         acc_bool = true;
       end
       gyr = data(1, 5:7)';
       if ~any(isnan(gyr))  % Gyro measurements are available.
-        % Do something
-        gyr_bool = true;
+%         gyr_bool = true;
       end
 
       mag = data(1, 8:10)';
       if ~any(isnan(mag))  % Mag measurements are available.
-        % Do something
         mag_bool = true;
       end
       
       if gyr_bool == true
           dt = t - t0 - xhat.t(end);
-          
+
           [x, P] = tu_qw(x, P, gyr, dt, Rw);       % Time update of EKF
           [x, P] = mu_normalizeQ(x, P);
           gyr_bool = false;
+      else
+          dt = t - t0 - xhat.t(end);
+          
+          [x, P] = tu_q(x, P, dt, Rw);
+          [x, P] = mu_normalizeQ(x, P);
       end
       
       if acc_bool == true 
-          if abs(9.81 - norm(acc)) <= 1e-1
+          if abs(9.81 - norm(acc)) <= 5e-1
               [x, P] = mu_acc(x, P, acc, Ra, g0);  
               [x, P] = mu_normalizeQ(x, P);
               accOut = 0;
@@ -134,7 +136,7 @@ function [xhat, meas] = Myfilter(calAcc, calGyr, calMag)
       
       if mag_bool == true
           L = (1-alpha)*L + alpha*norm(mag);
-          if abs(L - norm(mag)) <= 1e-1
+          if abs(L - norm(mag)) <= 5e-1
             [x, P] = mu_m(x, P, mag, m0,Rm);
             [x, P] = mu_normalizeQ(x, P);
             magOut = 0;
